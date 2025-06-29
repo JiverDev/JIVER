@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asistente Virtual Profesional</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .hero-section {
+      height: 100vh;
+      min-height: 600px;
+    }
+    @media (max-width: 768px) {
+      .hero-section {
+        min-height: 100vh;
+      }
+    }
+    .animate-fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .animate-fade-in.delay-100 {
+      transition-delay: 100ms;
+    }
+    .animate-fade-in.delay-200 {
+      transition-delay: 200ms;
+    }
+    .opacity-100 {
+      opacity: 1;
+    }
+    .translate-y-0 {
+      transform: translateY(0);
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .animate-bounce {
+      animation: bounce 2s infinite;
+    }
+    .client-name {
+      transition: filter 0.3s ease;
+    }
+    .client-name:hover {
+      filter: blur(0);
+    }
+
+    .lang-selector {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(5px);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+    .lang-btn {
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .lang-btn.active {
+      background: rgb(8, 145, 178);
+      color: white;
+    }
+    .lang-btn:not(.active):hover {
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+
+
+    /* CSS para el footer */
+
+    .footercontact {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.132);
+      padding: 20px;
+    }
+
+    .footercontact img {
+      height: 100px;
+      margin: 0 auto;
+    }
+
+    .lastpart {
+      color: #ffffff;
+      font-size: 13px;
+    }
+
+  </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 to-slate-800 text-white">
+  <!-- Selector de idioma -->
+  <div class="lang-selector flex">
+    <button class="lang-btn active" data-lang="es">ES</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
+  <!-- Sección Hero -->
+  <section class="hero-section flex items-center justify-center p-4">
+    <div class="text-center max-w-4xl mx-auto">
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 animate-fade-in">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-emerald-400" data-translate="hero.title1">Simplifica. Organiza.</span>
+        <span class="block md:inline mt-2 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400" data-translate="hero.title2">Triunfa.</span>
+      </h1>
+      <br><br>
+      <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-fade-in delay-100" data-translate="hero.subtitle">
+        Tu socio estratégico potenciando la productividad con excelencia y discreción para una vida impecable
+      </p>
+      <a href="#contacto" class="inline-block bg-cyan-600 hover:bg-cyan-700 px-8 py-3 rounded-lg text-lg md:text-xl text-white font-semibold transition-all hover:scale-105 shadow-lg animate-fade-in delay-200" data-translate="hero.cta">
+        Agendar Cita
+      </a>
+    </div>
+  </section>
+
+  <!-- Hero Section mejorada -->
+  <section class="hero-section flex items-center justify-center p-4 relative overflow-hidden">
+    <div class="text-center max-w-4xl mx-auto relative z-10">
+      <div class="mb-6 animate-fade-in group">
+        <div class="w-36 h-36 md:w-48 md:h-48 mx-auto overflow-hidden transition-all duration-300 group-hover:border-cyan-400/50">
+          <img 
+            src="logoblanco.png"
+            alt="Foto profesional"
+            class="w-full h-full object-cover transform transition duration-500 group-hover:scale-105"
+            loading="lazy"
+          >
+        </div>
+      </div>
+      <h1 class="font-playfair text-5xl md:text-6xl leading-tight" data-translate="hero2.title">
+        ¿Necesitas alguien <span class="block md:inline">de Confianza? Aquí estoy yo</span>
+      </h1> <br>
+      <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-fade-in delay-100 max-w-2xl mx-auto" data-translate="hero2.subtitle">
+        Optimizo tu tiempo para que te enfoques en lo importante. +5 años ayudando a profesionales como tú.
+      </p>
+      <div class="animate-fade-in delay-200 space-y-3 sm:space-y-0 sm:space-x-4">
+        <a href="#contacto" class="inline-block bg-cyan-600 hover:bg-cyan-700 px-8 py-3 rounded-lg text-lg md:text-xl text-white font-semibold transition-all hover:scale-105 shadow-lg" data-translate="hero2.cta1">
+          Consulta gratuita
+        </a>
+        <a href="#servicios" class="inline-block border border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 px-8 py-3 rounded-lg text-lg md:text-xl font-semibold transition-all hover:scale-105" data-translate="hero2.cta2">
+          Ver servicios
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Metodología -->
+  <section class="mb-16 container mx-auto px-4">
+    <h2 class="text-2xl md:text-3xl font-semibold text-cyan-300 mb-8 text-center" data-translate="methodology.title">Conoce mi Metodología</h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="bg-slate-700/50 p-5 rounded-xl border border-cyan-900/50 text-center">
+        <div class="w-12 h-12 bg-cyan-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-cyan-400 font-bold text-xl">1</span>
+        </div>
+        <h3 class="font-medium text-cyan-200 mb-2" data-translate="methodology.step1.title">Consulta Inicial</h3>
+        <p class="text-gray-300 text-sm" data-translate="methodology.step1.desc">Analizamos tus necesidades en una llamada sin compromiso</p>
+      </div>
+      <div class="bg-slate-700/50 p-5 rounded-xl border border-cyan-900/50 text-center">
+        <div class="w-12 h-12 bg-cyan-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-cyan-400 font-bold text-xl">2</span>
+        </div>
+        <h3 class="font-medium text-cyan-200 mb-2" data-translate="methodology.step2.title">Plan Personalizado</h3>
+        <p class="text-gray-300 text-sm" data-translate="methodology.step2.desc">Creo una estrategia adaptada a tus objetivos</p>
+      </div>
+      <div class="bg-slate-700/50 p-5 rounded-xl border border-cyan-900/50 text-center">
+        <div class="w-12 h-12 bg-cyan-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-cyan-400 font-bold text-xl">3</span>
+        </div>
+        <h3 class="font-medium text-cyan-200 mb-2" data-translate="methodology.step3.title">Implementación</h3>
+        <p class="text-gray-300 text-sm" data-translate="methodology.step3.desc">Comenzamos a trabajar según lo acordado</p>
+      </div>
+      <div class="bg-slate-700/50 p-5 rounded-xl border border-cyan-900/50 text-center">
+        <div class="w-12 h-12 bg-cyan-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-cyan-400 font-bold text-xl">4</span>
+        </div>
+        <h3 class="font-medium text-cyan-200 mb-2" data-translate="methodology.step4.title">Seguimiento</h3>
+        <p class="text-gray-300 text-sm" data-translate="methodology.step4.desc">Revisamos resultados y ajustamos estrategia</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="mb-10 md:mb-16 container mx-auto">
+    <h2 class="text-xl md:text-2xl font-semibold text-cyan-300 mb-4 md:mb-6" data-translate="services.title">Servicios destacados</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+      <div class="bg-slate-700 p-3 md:p-4 rounded-xl shadow-lg flex items-center gap-3 transition-all hover:scale-[1.02]">
+        <i data-lucide="calendar" class="text-cyan-400 w-5 h-5"></i>
+        <span class="text-sm md:text-base" data-translate="services.service1">Gestión de agenda, citas y recordatorios</span>
+      </div>
+      <div class="bg-slate-700 p-3 md:p-4 rounded-xl shadow-lg flex items-center gap-3 transition-all hover:scale-[1.02]">
+        <i data-lucide="mail" class="text-cyan-400 w-5 h-5"></i>
+        <span class="text-sm md:text-base" data-translate="services.service2">Organización de correos electrónicos</span>
+      </div>
+      <div class="bg-slate-700 p-3 md:p-4 rounded-xl shadow-lg flex items-center gap-3 transition-all hover:scale-[1.02]">
+        <i data-lucide="plane" class="text-cyan-400 w-5 h-5"></i>
+        <span class="text-sm md:text-base" data-translate="services.service3">Coordinación de viajes y eventos</span>
+      </div>
+      <div class="bg-slate-700 p-3 md:p-4 rounded-xl shadow-lg flex items-center gap-3 transition-all hover:scale-[1.02]">
+        <i data-lucide="file-text" class="text-cyan-400 w-5 h-5"></i>
+        <span class="text-sm md:text-base" data-translate="services.service4">Redacción y apoyo administrativo</span>
+      </div>
+      <div class="bg-slate-700 p-3 md:p-4 rounded-xl shadow-lg flex items-center gap-3 transition-all hover:scale-[1.02]">
+        <i data-lucide="zap" class="text-cyan-400 w-5 h-5"></i>
+        <span class="text-sm md:text-base" data-translate="services.service5">Automatización de tareas con herramientas digitales</span>
+      </div>
+      <div class="bg-slate-700 p-3 md:p-4 rounded-xl shadow-lg flex items-center gap-3 transition-all hover:scale-[1.02]">
+        <i data-lucide="users" class="text-cyan-400 w-5 h-5"></i>
+        <span class="text-sm md:text-base" data-translate="services.service6">Soporte en organización de proyectos y clientes</span>
+      </div>
+      <div class="bg-slate-700 p-3 md:p-4 rounded-xl shadow-lg flex items-center gap-3 transition-all hover:scale-[1.02]">
+        <i data-lucide="instagram" class="text-cyan-400 w-5 h-5"></i>
+        <span class="text-sm md:text-base" data-translate="services.service7">Marketing digital y manejo de redes sociales</span>
+      </div>
+      <div class="bg-slate-700 p-3 md:p-4 rounded-xl shadow-lg flex items-center gap-3 transition-all hover:scale-[1.02]">
+        <i data-lucide="notebook-pen" class="text-cyan-400 w-5 h-5"></i>
+        <span class="text-sm md:text-base" data-translate="services.service8">Planificación de rutina ideal con recordatorios</span>
+      </div>
+    </div>
+    
+    <div class="text-center p-4 rounded-xl">
+      <p class="text-gray-300 mb-3 text-sm md:text-base" data-translate="services.custom">¿Necesitas algo más? Mis servicios son completamente personalizables</p>
+      <a href="#contacto" class="inline-block bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-md text-sm md:text-base text-white font-medium transition-all hover:scale-105" data-translate="services.cta">
+        Habla conmigo sobre tu caso
+      </a>
+    </div>
+  </section>
+
+  <!-- Tecnologías -->
+  <!-- Tecnologías - Versión Ampliada -->
+    <section class="mb-10 md:mb-16 container mx-auto px-4">
+      <h2 class="text-xl md:text-2xl font-semibold text-cyan-300 mb-4 md:mb-5" data-translate="tech.title">Tecnologías que domino</h2>
+      
+      <!-- Categoría: Productividad -->
+      <div class="mb-4">
+        <h3 class="text-sm font-medium text-cyan-200 mb-2" data-translate="tech.category1">Productividad Profesional</h3>
+        <div class="flex flex-wrap gap-2 md:gap-3 text-xs md:text-sm">
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fab fa-microsoft text-blue-300"></i> Microsoft 365
+          </span>
+          <!-- Excel -->
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1 hover:bg-cyan-700 transition-colors">
+            <i class="fas fa-file-excel text-green-300"></i> Excel 
+          </span>
+          
+          <!-- Word -->
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1 hover:bg-cyan-700 transition-colors">
+            <i class="fas fa-file-word text-blue-300"></i> Word
+          </span>
+          
+          <!-- PowerPoint -->
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1 hover:bg-cyan-700 transition-colors">
+            <i class="fas fa-file-powerpoint text-orange-300"></i> PowerPoint
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fab fa-google-drive text-green-300"></i> Google Workspace
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fas fa-calendar-check text-purple-300"></i> Calendly
+          </span>
+        </div>
+      </div>
+
+      <!-- Categoría: Gestión de Proyectos -->
+      <div class="mb-4">
+        <h3 class="text-sm font-medium text-cyan-200 mb-2" data-translate="tech.category2">Gestión de Proyectos</h3>
+        <div class="flex flex-wrap gap-2 md:gap-3 text-xs md:text-sm">
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fab fa-jira text-blue-500"></i> Jira
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fas fa-project-diagram text-teal-300"></i> Notion
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fab fa-google-drive text-blue-300"></i> Drive
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1" data-translate="redaccion">
+            <i class="fas fa-file-check" ></i> Redacción
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1" data-translate="organizacion">
+            <i class="fas fa-calendar-check text-red-300" ></i> Organización
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1" data-translate="datos">
+            <i class="fas fa-chart-pie text-orange-300" ></i> Analisis de datos
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1 hover:bg-cyan-700 transition-colors" data-translate="plan">
+            <i class="fas fa-chart-gantt text-green-300" ></i> Planificación
+          </span>
+        </div>
+      </div>
+
+      <!-- Categoría: Comunicación -->
+      <div class="mb-4">
+        <h3 class="text-sm font-medium text-cyan-200 mb-2" data-translate="tech.category3">Comunicación</h3>
+        <div class="flex flex-wrap gap-2 md:gap-3 text-xs md:text-sm">
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fab fa-google text-green-300"></i> G. Meet
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fab fa-microsoft-teams text-blue-400"></i> Teams
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fas fa-video text-red-300"></i> Zoom
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fab fa-discord text-indigo-300"></i> Discord
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fab fa-whatsapp text-green-300"></i> WhatsApp Business
+          </span>
+        </div>
+      </div>
+
+      <!-- Categoría: Otros -->
+      <div class="mb-4">
+        <h3 class="text-sm font-medium text-cyan-200 mb-2" data-translate="tech.category4">Otros</h3>
+        <div class="flex flex-wrap gap-2 md:gap-3 text-xs md:text-sm">
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fas fa-robot text-yellow-300"></i> Zapier
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fas fa-chart-bar text-blue-300"></i> Power BI
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fab fa-instagram text-pink-400"></i> Redes Sociales
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fab fa-wix text-blue-400"></i> Wix
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fas fa-desktop text-red-300"></i> AnyDesk
+          </span>
+        </div>
+      </div>
+
+      <!-- Categoría Ingeniería Civil -->
+      <div class="mb-4">
+        <h3 class="text-sm font-medium text-cyan-200 mb-2" data-translate="tech.category5">Ingeniería </h3>
+        <div class="flex flex-wrap gap-2 md:gap-3 text-xs md:text-sm">
+          <!-- Diseño y CAD -->
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fas fa-drafting-compass text-red-300"></i> AutoCAD
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fas fa-building text-amber-300"></i> Revit
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1 hover:bg-cyan-700 transition-colors">
+            <i class="fas fa-calculator text-purple-300"></i> MathCAD
+          </span>
+          
+          <!-- Análisis Estructural -->
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fas fa-weight-hanging text-indigo-300"></i> ETABS
+          </span>
+          
+          
+          <!-- Hidráulica y Ambiental -->
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fas fa-recycle text-emerald-300"></i> EPANET
+          </span>
+          
+          <!-- BIM -->
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fas fa-city text-gray-300"></i> BIM
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1 hover:bg-cyan-700 transition-colors">
+            <i class="fas fa-timeline text-blue-300"></i> Microsoft Project
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fab fa-github text-gray-100"></i> GitHub
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fas fa-globe-americas text-blue-400"></i> ArcGIS Pro
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fas fa-cube text-emerald-400"></i> SketchUp Pro
+          </span>
+          <span class="bg-cyan-800/80 px-3 py-1 rounded-full flex items-center gap-1">
+            <i class="fab fa-google text-red-300"></i> Maps
+          </span>
+
+        </div>
+      </div>
+
+      <!-- Categoría: Extra (Opcional) -->
+      <div class="text-center mt-5">
+        <p class="text-xs text-gray-400 inline-block bg-slate-800/50 px-3 py-1 rounded-full" data-translate="tech.more">
+          +20 herramientas adicionales disponibles según necesidades específicas
+        </p>
+      </div>
+    </section>
+
+
+    <br><br>
+
+  <!-- Testimonios -->
+  <section class="mb-10 md:mb-16 container mx-auto px-4">
+    <h2 class="text-xl md:text-2xl font-semibold text-cyan-300 mb-6 md:mb-8 text-center" data-translate="testimonials.title">Lo que dicen mis clientes</h2>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      <!-- Testimonio 1 -->
+      <div class="bg-slate-700/50 p-4 md:p-5 rounded-xl border border-cyan-900/50 hover:border-cyan-400/30 transition-all h-full flex flex-col">
+        <div class="flex mb-2">
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+        </div>
+        <p class="text-gray-200 italic text-xs md:text-sm mb-3 flex-grow" data-translate="testimonials.test1.text">
+          "Mi agenda fluye y mi estrés bajó un 80%. Como tener un segundo cerebro que anticipa mis necesidades."
+        </p>
+        <div class="border-t border-slate-600 pt-2 mt-auto">
+          <p class="text-cyan-400 font-medium text-xs blur-[1px] hover:blur-0 client-name" data-translate="testimonials.test1.name">Laura R.</p>
+          <p class="text-xxs md:text-xs text-gray-400" data-translate="testimonials.test1.position">CEO en empresa de tecnología</p>
+          <p class="text-[10px] text-slate-500 mt-1" data-translate="testimonials.test1.note">※ Cliente exclusivo - Información confidencial</p>
+        </div>
+      </div>
+
+      <!-- Testimonio 2 -->
+      <div class="bg-slate-700/50 p-4 md:p-5 rounded-xl border border-cyan-900/50 hover:border-cyan-400/30 transition-all h-full flex flex-col">
+        <div class="flex mb-2">
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+        </div>
+        <p class="text-gray-200 italic text-xs md:text-sm mb-3 flex-grow" data-translate="testimonials.test2.text">
+          "Organizado, proactivo y discreto. No se me escapa nada gracias a su ayuda."
+        </p>
+        <div class="border-t border-slate-600 pt-2 mt-auto">
+          <p class="text-cyan-400 font-medium text-xs blur-[1px] hover:blur-0 client-name" data-translate="testimonials.test2.name">Andrés M.</p>
+          <p class="text-xxs md:text-xs text-gray-400" data-translate="testimonials.test2.position">Director Ejecutivo</p>
+          <p class="text-[10px] text-slate-500 mt-1" data-translate="testimonials.test2.note">※ Cliente exclusivo - Información reservada</p>
+        </div>
+      </div>
+
+      <!-- Testimonio 3 -->
+      <div class="bg-slate-700/50 p-4 md:p-5 rounded-xl border border-cyan-900/50 hover:border-cyan-400/30 transition-all h-full flex flex-col">
+        <div class="flex mb-2">
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+        </div>
+        <p class="text-gray-200 italic text-xs md:text-sm mb-3 flex-grow" data-translate="testimonials.test3.text">
+          "Como consultora, mi imagen lo es todo. Mi asistente mantiene mi comunicación impecable y mis clientes notan la diferencia."
+        </p>
+        <div class="border-t border-slate-600 pt-2 mt-auto">
+          <p class="text-cyan-400 font-medium text-xs blur-[1px] hover:blur-0 client-name" data-translate="testimonials.test3.name">Diego M.</p>
+          <p class="text-xxs md:text-xs text-gray-400" data-translate="testimonials.test3.position">Consultor en Marketing Digital</p>
+          <p class="text-[10px] text-slate-500 mt-1" data-translate="testimonials.test3.note">※ Cliente desde 2023</p>
+        </div>
+      </div>
+
+      <!-- Testimonio 4 -->
+      <div class="bg-slate-700/50 p-4 md:p-5 rounded-xl border border-cyan-900/50 hover:border-cyan-400/30 transition-all h-full flex flex-col">
+        <div class="flex mb-2">
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+          <i class="fas fa-star text-yellow-400 text-xs md:text-sm"></i>
+        </div>
+        <p class="text-gray-200 italic text-xs md:text-sm mb-3 flex-grow" data-translate="testimonials.test4.text">
+          "Trabajo con información confidencial. Su profesionalismo y protocolos de seguridad me dan total tranquilidad."
+        </p>
+        <div class="border-t border-slate-600 pt-2 mt-auto">
+          <p class="text-cyan-400 font-medium text-xs blur-[1px] hover:blur-0 client-name" data-translate="testimonials.test4.name">Abogado Corporativo</p>
+          <p class="text-xxs md:text-xs text-gray-400" data-translate="testimonials.test4.position">Sector Legal</p>
+          <p class="text-[10px] text-slate-500 mt-1" data-translate="testimonials.test4.note">※ Información protegida</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="text-center mt-4 md:mt-6">
+      <p class="text-xs md:text-sm text-slate-500 inline-block bg-slate-800/50 px-3 py-1 md:px-4 md:py-2 rounded-full" data-translate="testimonials.confidential">
+        🔒 Todos mis clientes son confidenciales - Discreción garantizada
+      </p>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+<section id="contacto" class="max-w-2xl mx-auto px-4">
+  <div class="text-center mb-8">
+    <h2 class="text-2xl md:text-3xl font-bold text-cyan-300 mb-3" data-translate="contact.title">Estoy Listo para Ser tu Mano Derecha</h2>
+    <p class="text-gray-300 md:text-lg max-w-lg mx-auto" data-translate="contact.subtitle">
+      Completa este formulario y en menos de 24 horas me pondré en contacto contigo para una consulta gratuita.
+    </p>
+  </div>
+
+  <form action="https://formspree.io/f/xkgbkepb" method="POST" enctype="multipart/form-data"
+  class="bg-slate-700/70 backdrop-blur-sm p-6 md:p-8 rounded-xl shadow-xl border border-cyan-900/30 hover:border-cyan-400/20 transition-all duration-300">
+    <div class="space-y-5">
+      <!-- Grupo Nombre -->
+      <div class="space-y-1">
+        <label for="nombre" class="block text-sm font-medium text-cyan-300" data-translate="contact.form.name">Nombre completo*</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="fas fa-user text-cyan-400/80"></i>
+          </div>
+          <input 
+            type="text" 
+            id="nombre" 
+            name="Nombre"
+            required
+            class="block w-full pl-10 pr-3 py-3 bg-slate-800/80 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white placeholder-gray-400 transition-all"
+            data-translate-placeholder="contact.form.namePlaceholder"
+            placeholder="¿Cómo te llamas?">
+        </div>
+      </div>
+
+      <!-- Grupo Email -->
+      <div class="space-y-1">
+        <label for="email" class="block text-sm font-medium text-cyan-300" data-translate="contact.form.email">Correo electrónico*</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="fas fa-envelope text-cyan-400/80"></i>
+          </div>
+          <input 
+            type="email" 
+            id="email" 
+            name="Email"
+            required
+            class="block w-full pl-10 pr-3 py-3 bg-slate-800/80 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white placeholder-gray-400 transition-all"
+            data-translate-placeholder="contact.form.emailPlaceholder"
+            placeholder="tucorreo@ejemplo.com">
+        </div>
+      </div>
+
+      <!-- Grupo Servicios -->
+      <div class="space-y-1">
+        <label for="servicio" class="block text-sm font-medium text-cyan-300" data-translate="contact.form.service">¿Qué servicio te interesa?*</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="fas fa-tasks text-cyan-400/80"></i>
+          </div>
+          <select 
+            id="servicio"
+            name="Servicio"
+            required
+            class="block w-full pl-10 pr-3 py-3 bg-slate-800/80 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white appearance-none">
+            <option value="" disabled selected data-translate="contact.form.serviceDefault">Selecciona una opción</option>
+            <option value="Asistente Personal" data-translate="contact.form.option1">Asistente Personal</option>
+            <option value="Apoyo administrativo empresarial" data-translate="contact.form.option2">Apoyo administrativo empresarial</option>
+            <option value="Agente de Confianza" data-translate="contact.form.option3">Agente de Confianza</option>
+            <option value="Quiero que seas mi mano derecha" data-translate="contact.form.option4">Quiero que seas mi mano derecha</option>
+            <option value="Servicio personalizado" data-translate="contact.form.option5">Servicio personalizado</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+            <i class="fas fa-chevron-down text-gray-400"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grupo Mensaje -->
+      <div class="space-y-1">
+        <label for="mensaje" class="block text-sm font-medium text-cyan-300" data-translate="contact.form.message">Cuéntame sobre tus necesidades*</label>
+        <textarea 
+          id="mensaje"
+          name="Mensaje"
+          rows="4"
+          required
+          class="block w-full px-3 py-3 bg-slate-800/80 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white placeholder-gray-400 transition-all"
+          data-translate-placeholder="contact.form.messagePlaceholder"
+          placeholder="Ej: Necesito ayuda con la organización de mi agenda empresarial y filtrado de correos... Si deseas puedes dejar el número de teléfono/celular"></textarea>
+      </div>
+
+      <!-- Botón de enviar -->
+      <button 
+        type="submit"
+        class="w-full bg-cyan-700 hover:bg-cyan-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-md hover:shadow-lg transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 border border-cyan-600">
+        <i class="fas fa-paper-plane text-cyan-100"></i>
+        <span data-translate="contact.form.submit">Enviar solicitud</span>
+      </button>
+    </div>
+  </form>
+
+  <div class="text-center mt-6">
+    <p class="text-gray-400 text-sm" data-translate="contact.or">O si prefieres</p>
+    <a href="https://wa.me/573001112233" target="_blank" class="inline-flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors mt-2 font-medium">
+      <i class="fab fa-whatsapp text-lg"></i>
+      <span data-translate="contact.whatsapp">Escríbeme directamente por WhatsApp</span>
+    </a>
+  </div>
+
+  <div class="h-12"></div>
+</section>
+
+  <!-- Barra inferior fija (desktop) -->
+  <div id="bottom-bar" class="fixed bottom-0 left-0 right-0 bg-slate-800/95 py-2 md:py-3 border-t border-cyan-900/50 backdrop-blur-sm hidden md:block">
+    <div class="container mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-2">
+      <p class="text-gray-300 text-xs md:text-sm text-center md:text-left" data-translate="footer.ready">
+        ¿Listo para aumentar tu productividad?
+      </p>
+      <div class="flex gap-2">
+        <a href="#contacto" class="bg-cyan-600 hover:bg-cyan-700 px-3 py-1 md:px-4 md:py-2 rounded text-xs md:text-sm text-white font-medium transition-all hover:scale-105" data-translate="footer.contact">
+          Contactar ahora
+        </a>
+        <a href="https://wa.me/573001112233" target="_blank" class="bg-green-600 hover:bg-green-700 px-3 py-1 md:px-4 md:py-2 rounded text-xs md:text-sm text-white font-medium flex items-center gap-1 transition-all hover:scale-105">
+          <i class="fab fa-whatsapp"></i> <span data-translate="footer.whatsapp">WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón flotante WhatsApp (solo mobile) -->
+  <div id="whatsapp-button" class="fixed bottom-6 right-6 z-50 md:hidden">
+    <a href="https://wa.me/573001112233" class="flex items-center justify-center w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 shadow-lg animate-bounce">
+      <i class="fab fa-whatsapp text-white text-2xl"></i>
+    </a>
+  </div>
+
+  <footer class="footercontact">
+    <!-- Para los caracteres especiales se busca y se coloca el que diga "entidad" copyright : &copy, -->
+      
+      <p class="lastpart" data-translate="developed">Desarrollado por :</p> 
+
+      <a href="https://jiverdev.github.io/JIVR/" target="new">
+      <img class="logo" src="logoblanco.png" alt="logo jivr">
+          </a>
+      
+      <div class="h-12"></div> <!-- Esto añade exactamente 3rem de espacio -->
+  </footer>
+
+<script>
+    // Traducciones completas
+    const translations = {
+      es: {
+        // Hero
+        "hero.title1": "Simplifica. Organiza.",
+        "hero.title2": "Triunfa.",
+        "hero.subtitle": "Tu socio estratégico potenciando la productividad con excelencia y discreción para una vida impecable",
+        "hero.cta": "Agendar Cita",
+        "hero2.title": "¿Necesitas alguien de Confianza? Aquí estoy yo",
+        "hero2.subtitle": "Optimizo tu tiempo para que te enfoques en lo importante. +5 años ayudando a profesionales como tú.",
+        "hero2.cta1": "Consulta gratuita",
+        "hero2.cta2": "Ver servicios",
+        
+        // Metodología
+        "methodology.title": "Conoce mi Metodología",
+        "methodology.step1.title": "Consulta Inicial",
+        "methodology.step1.desc": "Analizamos tus necesidades en una llamada sin compromiso",
+        "methodology.step2.title": "Plan Personalizado",
+        "methodology.step2.desc": "Creo una estrategia adaptada a tus objetivos",
+        "methodology.step3.title": "Implementación",
+        "methodology.step3.desc": "Comenzamos a trabajar según lo acordado",
+        "methodology.step4.title": "Seguimiento",
+        "methodology.step4.desc": "Revisamos resultados y ajustamos estrategia",
+        
+        // Servicios
+        "services.title": "Servicios destacados",
+        "services.service1": "Gestión de agenda, citas y recordatorios",
+        "services.service2": "Organización de correos electrónicos",
+        "services.service3": "Coordinación de viajes y eventos",
+        "services.service4": "Redacción y apoyo administrativo",
+        "services.service5": "Automatización de tareas con herramientas digitales",
+        "services.service6": "Soporte en organización de proyectos y clientes",
+        "services.service7": "Marketing digital y manejo de redes sociales",
+        "services.service8": "Planificación de rutina ideal con recordatorios",
+        "services.custom": "¿Necesitas algo más? Mis servicios son completamente personalizables",
+        "services.cta": "Habla conmigo sobre tu caso",
+
+        "redaccion" : "Redacción",
+        "organizacion" : "Organización",
+        "datos" : "Análisis de datos",
+        "plan" : "Planificación",
+        
+        // Tecnologías
+        "tech.title": "Tecnologías que domino",
+        "tech.category1": "Productividad Profesional",
+        "tech.category2": "Gestión de Proyectos",
+        "tech.category3": "Comunicación",
+        "tech.category4": "Otros",
+        "tech.category5": "Ingeniería",
+        "tech.tool1": "Microsoft 365",
+        "tech.tool2": "Google Workspace",
+        "tech.tool3": "G. Meet",
+        "tech.tool4": "WhatsApp Business",
+        "tech.more": "+20 herramientas adicionales disponibles según necesidades específicas",
+        
+        // Testimonios
+        "testimonials.title": "Lo que dicen mis clientes",
+        "testimonials.test1.text": "\"Mi agenda fluye y mi estrés bajó un 80%. Como tener un segundo cerebro que anticipa mis necesidades.\"",
+        "testimonials.test1.name": "Laura R.",
+        "testimonials.test1.position": "CEO en empresa de tecnología",
+        "testimonials.test1.note": "※ Cliente exclusivo - Información confidencial",
+        "testimonials.test2.text": "\"Organizado, proactivo y discreto. No se me escapa nada gracias a su ayuda.\"",
+        "testimonials.test2.name": "Andrés M.",
+        "testimonials.test2.position": "Director Ejecutivo",
+        "testimonials.test2.note": "※ Cliente exclusivo - Información reservada",
+        "testimonials.test3.text": "\"Como consultora, mi imagen lo es todo. Mi asistente mantiene mi comunicación impecable y mis clientes notan la diferencia.\"",
+        "testimonials.test3.name": "Diego M.",
+        "testimonials.test3.position": "Consultor en Marketing Digital",
+        "testimonials.test3.note": "※ Cliente desde 2023",
+        "testimonials.test4.text": "\"Trabajo con información confidencial. Su profesionalismo y protocolos de seguridad me dan total tranquilidad.\"",
+        "testimonials.test4.name": "Abogado Corporativo",
+        "testimonials.test4.position": "Sector Legal",
+        "testimonials.test4.note": "※ Información protegida",
+        "testimonials.confidential": "🔒 Todos mis clientes son confidenciales - Discreción garantizada",
+        
+        // Contacto
+        "contact.title": "Estoy Listo para Ser tu Mano Derecha",
+        "contact.subtitle": "Completa este formulario y en menos de 24 horas me pondré en contacto contigo para una consulta gratuita.",
+        "contact.or": "O si prefieres",
+        "contact.whatsapp": "Escríbeme directamente por WhatsApp",
+        "contact.form.name": "Nombre completo*",
+        "contact.form.namePlaceholder": "¿Cómo te llamas?",
+        "contact.form.email": "Correo electrónico*",
+        "contact.form.emailPlaceholder": "tucorreo@ejemplo.com",
+        "contact.form.service": "¿Qué servicio te interesa?*",
+        "contact.form.serviceDefault": "Selecciona una opción",
+        "contact.form.option1": "Asistente Personal",
+        "contact.form.option2": "Apoyo administrativo empresarial",
+        "contact.form.option3": "Agente de Confianza",
+        "contact.form.option4": "Quiero que seas mi mano derecha",
+        "contact.form.option5": "Servicio personalizado",
+        "contact.form.message": "Cuéntame sobre tus necesidades*",
+        "contact.form.messagePlaceholder": "Ej: Necesito ayuda con la organización de mi agenda empresarial y filtrado de correos... Si deseas puedes dejar el número de teléfono/celular",
+        "contact.form.submit": "Enviar solicitud",
+
+        "contact.title": "Estoy Listo para Ser tu Mano Derecha",
+        "contact.subtitle": "Completa este formulario y en menos de 24 horas me pondré en contacto contigo para una consulta gratuita.",
+        "contact.or": "O si prefieres",
+        "contact.whatsapp": "Escríbeme directamente por WhatsApp",
+        "contact.form.name": "Nombre completo*",
+        "contact.form.namePlaceholder": "¿Cómo te llamas?",
+        "contact.form.email": "Correo electrónico*",
+        "contact.form.emailPlaceholder": "tucorreo@ejemplo.com",
+        "contact.form.service": "¿Qué servicio te interesa?*",
+        "contact.form.serviceDefault": "Selecciona una opción",
+        "contact.form.option1": "Asistente Personal",
+        "contact.form.option2": "Apoyo administrativo empresarial",
+        "contact.form.option3": "Agente de Confianza",
+        "contact.form.option4": "Quiero que seas mi mano derecha",
+        "contact.form.option5": "Servicio personalizado",
+        "contact.form.message": "Cuéntame sobre tus necesidades*",
+        "contact.form.messagePlaceholder": "Ej: Necesito ayuda con la organización de mi agenda empresarial y filtrado de correos... Si deseas puedes dejar el número de teléfono/celular",
+        "contact.form.submit": "Enviar solicitud",
+        
+        // Footer
+        "footer.ready": "¿Listo para aumentar tu productividad?",
+        "footer.contact": "Contactar ahora",
+        "footer.whatsapp": "WhatsApp",
+        "developed": "Desarrollado por :"
+      },
+      en: {
+        // Hero
+        "hero.title1": "Simplify. Organize.",
+        "hero.title2": "Succeed.",
+        "hero.subtitle": "Your strategic partner boosting productivity with excellence and discretion for a flawless life",
+        "hero.cta": "Schedule Meeting",
+        "hero2.title": "Need Someone You Can Trust? Here I Am",
+        "hero2.subtitle": "I optimize your time so you can focus on what matters. 5+ years helping professionals like you.",
+        "hero2.cta1": "Free Consultation",
+        "hero2.cta2": "View Services",
+        
+        // Methodology
+        "methodology.title": "My Working Methodology",
+        "methodology.step1.title": "Initial Consultation",
+        "methodology.step1.desc": "We analyze your needs in a no-obligation call",
+        "methodology.step2.title": "Custom Plan",
+        "methodology.step2.desc": "I create a strategy tailored to your goals",
+        "methodology.step3.title": "Implementation",
+        "methodology.step3.desc": "We start working as agreed",
+        "methodology.step4.title": "Follow-up",
+        "methodology.step4.desc": "We review results and adjust strategy",
+        
+        
+        // Services
+        "services.title": "Featured Services",
+        "services.service1": "Calendar management, appointments and reminders",
+        "services.service2": "Email organization",
+        "services.service3": "Travel and event coordination",
+        "services.service4": "Writing and administrative support",
+        "services.service5": "Task automation with digital tools",
+        "services.service6": "Project and client organization support",
+        "services.service7": "Digital marketing and social media management",
+        "services.service8": "Ideal routine planning with reminders",
+        "services.custom": "Need something else? My services are fully customizable",
+        "services.cta": "Talk to me about your case",
+
+        "redaccion" : "Writing ",
+        "organizacion" : "Organization ",
+        "datos" : "Data analysis",
+        "plan" : "Planning",
+        
+        // Technologies
+        "tech.title": "Tools & Skills",
+        "tech.category1": "Professional Productivity",
+        "tech.category2": "Project Management",
+        "tech.category3": "Communication",
+        "tech.category4": "Others",
+        "tech.category5": "Engineering",
+        "tech.tool1": "Microsoft 365",
+        "tech.tool2": "Google Workspace",
+        "tech.tool3": "Google Meet",
+        "tech.tool4": "WhatsApp Business",
+        "tech.more": "+20 additional tools available for specific needs",
+        
+        // Testimonials
+        "testimonials.title": "What My Clients Say",
+        "testimonials.test1.text": "\"My schedule flows and my stress decreased by 80%. Like having a second brain that anticipates my needs.\"",
+        "testimonials.test1.name": "Laura R.",
+        "testimonials.test1.position": "CEO at tech company",
+        "testimonials.test1.note": "※ Exclusive client - Confidential information",
+        "testimonials.test2.text": "\"Organized, proactive and discreet. I don't miss anything thanks to their help.\"",
+        "testimonials.test2.name": "Andrés M.",
+        "testimonials.test2.position": "Executive Director",
+        "testimonials.test2.note": "※ Exclusive client - Reserved information",
+        "testimonials.test3.text": "\"As a consultant, my image is everything. My assistant keeps my communication impeccable and my clients notice the difference.\"",
+        "testimonials.test3.name": "Diego M.",
+        "testimonials.test3.position": "Digital Marketing Consultant",
+        "testimonials.test3.note": "※ Client since 2023",
+        "testimonials.test4.text": "\"I work with confidential information. Their professionalism and security protocols give me complete peace of mind.\"",
+        "testimonials.test4.name": "Corporate Lawyer",
+        "testimonials.test4.position": "Legal Sector",
+        "testimonials.test4.note": "※ Protected information",
+        "testimonials.confidential": "🔒 All my clients are confidential - Discretion guaranteed",
+        
+        // Contact
+        "contact.title": "Let Me Be Your Strategic Ally",
+        "contact.subtitle": "Complete this form and I'll contact you within 24 hours for a free consultation.",
+        "contact.or": "Or if you prefer",
+        "contact.whatsapp": "Message me directly on WhatsApp",
+        "contact.form.name": "Full name*",
+        "contact.form.namePlaceholder": "What's your name?",
+        "contact.form.email": "Email*",
+        "contact.form.emailPlaceholder": "your@email.com",
+        "contact.form.service": "What service are you interested in?*",
+        "contact.form.serviceDefault": "Select an option",
+        "contact.form.option1": "Personal Assistant",
+        "contact.form.option2": "Business Administrative Support",
+        "contact.form.option3": "Trusted Agent",
+        "contact.form.option4": "I Want You to Be My Right Hand",
+        "contact.form.option5": "Custom Service",
+        "contact.form.message": "Tell me about your needs*",
+        "contact.form.messagePlaceholder": "Example: I need help with my business calendar organization and email filtering... You can include your phone number if you wish",
+        "contact.form.submit": "Submit Request",
+
+        "contact.title": "Let Me Be Your Strategic Ally",
+        "contact.subtitle": "Complete this form and I'll contact you within 24 hours for a free consultation.",
+        "contact.or": "Or if you prefer",
+        "contact.whatsapp": "Message me directly on WhatsApp",
+        "contact.form.name": "Full name*",
+        "contact.form.namePlaceholder": "What's your name?",
+        "contact.form.email": "Email*",
+        "contact.form.emailPlaceholder": "your@email.com",
+        "contact.form.service": "What service are you interested in?*",
+        "contact.form.serviceDefault": "Select an option",
+        "contact.form.option1": "Personal Assistant",
+        "contact.form.option2": "Business Administrative Support",
+        "contact.form.option3": "Trusted Agent",
+        "contact.form.option4": "I Want You to Be My Right Hand",
+        "contact.form.option5": "Custom Service",
+        "contact.form.message": "Tell me about your needs*",
+        "contact.form.messagePlaceholder": "Example: I need help with my business calendar organization and email filtering... You can include your phone number if you wish",
+        "contact.form.submit": "Submit Request",
+        
+        // Footer
+        "footer.ready": "Ready to boost your productivity?",
+        "footer.contact": "Contact Now",
+        "footer.whatsapp": "WhatsApp",
+        "developed": "Developed by"
+      }
+    };
+
+
+
+    // Sistema de traducción
+    let currentLang = localStorage.getItem('language') || 'es';
+
+    // Función para aplicar las traducciones
+    function applyTranslations() {
+      // Actualizar textos normales
+      document.querySelectorAll('[data-translate]').forEach(el => {
+        const key = el.getAttribute('data-translate');
+        if (translations[currentLang][key]) {
+          el.textContent = translations[currentLang][key];
+        }
+      });
+      
+      // Actualizar placeholders
+      document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-translate-placeholder');
+        if (translations[currentLang][key]) {
+          el.setAttribute('placeholder', translations[currentLang][key]);
+        }
+      });
+      
+      
+      // Actualizar opciones del select
+      const select = document.getElementById('servicio');
+      if (select) {
+        Array.from(select.options).forEach(option => {
+          if (option.value) {
+            const key = option.getAttribute('data-translate');
+            if (key && translations[currentLang][key]) {
+              option.textContent = translations[currentLang][key];
+            }
+          }
+        });
+      }
+      
+      // Actualizar atributo lang del HTML
+      document.documentElement.lang = currentLang;
+    }
+
+    // Función para cambiar idioma
+    function changeLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('language', lang);
+      
+      // Actualizar botones de idioma
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.dataset.lang === lang) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      
+      // Aplicar traducciones
+      applyTranslations();
+    }
+
+    // Event listeners para los botones de idioma
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        changeLanguage(btn.dataset.lang);
+      });
+    });
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', () => {
+      // Configurar idioma inicial
+      changeLanguage(currentLang);
+      
+      // Resto de tu código de inicialización...
+      checkMobile();
+      
+      const elements = document.querySelectorAll('.animate-fade-in');
+      elements.forEach((el, index) => {
+        setTimeout(() => {
+          el.classList.add('opacity-100', 'translate-y-0');
+        }, 200 * index);
+      });
+      
+      
+      // Inicializar iconos Lucide
+      lucide.createIcons();
+    });
+
+    // Función para móvil
+    function checkMobile() {
+      const whatsappBtn = document.getElementById('whatsapp-button');
+      const bottomBar = document.getElementById('bottom-bar');
+      
+      if (window.innerWidth < 768) {
+        whatsappBtn.classList.remove('hidden');
+        bottomBar.classList.add('hidden');
+      } else {
+        whatsappBtn.classList.add('hidden');
+        bottomBar.classList.remove('hidden');
+      }
+    }
+
+    window.addEventListener('resize', checkMobile);
+      </script>
+  
+</body>
+</html>
